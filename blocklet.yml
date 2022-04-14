@@ -1,15 +1,15 @@
-name: habits-tracker
+name: Habits Tracker
 title: habits-tracker
 description: A Blocklet DAPP blocklet
 keywords:
   - blocklet
   - react
 group: dapp
-did: z8iZobZnSW2XnEPrn3nGTmbFN6jU7MWmMLBbJ
+did: zNKhK2w6D9CeFGTwKp1FL4GALj3eASHDPZj7
 main: api/index.js
 author:
-  name: Mine
-  email: sjsjs@gmail.com
+  name: Karthus
+  email: karthus@arcblock.io
 repository:
   type: git
   url: git+https://github.com/blocklet/create-blocklet.git
@@ -27,22 +27,33 @@ interfaces:
   - type: web
     name: publicUrl
     path: /
-    prefix: "*"
+    prefix: '*'
     port: BLOCKLET_PORT
-    protocol: http
-community: ""
-documentation: ""
-homepage: ""
-license: ""
+    protocol: tcp
+    services:
+      - name: auth
+        config:
+          blockUnauthenticated: true
+          ignoreUrls:
+            - /api/**
+            - /api/game/*
+            - /home
+            - /api/did/*
+            - .well-known/service/login
+            - /manifest.json
+community: ''
+documentation: ''
+homepage: ''
+license: ''
 payment:
   price: []
   share: []
 timeout:
   start: 60
 requirements:
-  server: ">=1.6.29"
-  os: "*"
-  cpu: "*"
+  server: '>=1.6.29'
+  os: '*'
+  cpu: '*'
 scripts:
   preStart: node api/hooks/pre-start.js
   dev: npm run start
@@ -50,7 +61,7 @@ environments:
   - name: CHAIN_HOST
     description: What's endpoint of the chain?
     required: true
-    default: https://beta.abtnetwork.io/api/
+    default: https://beta.network.arcblockio.cn/api/
     secure: false
 capabilities: {}
 screenshots: []

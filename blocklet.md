@@ -1,3 +1,3 @@
 # habits-tracker
 
-A react template for creating a new blocklet project.
+一个付费参与打卡，完成目标则全额退回，未完成目标则没收金额平分给其他用户的 Dapp.

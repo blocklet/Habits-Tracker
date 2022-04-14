@@ -3,8 +3,11 @@ const AuthStorage = require('@arcblock/did-auth-storage-nedb');
 const getWallet = require('@blocklet/sdk/lib/wallet');
 const WalletAuthenticator = require('@blocklet/sdk/lib/wallet-authenticator');
 const WalletHandler = require('@blocklet/sdk/lib/wallet-handler');
+const Client = require('@ocap/client');
 
 const env = require('./env');
+
+const client = new Client('https://beta.abtnetwork.io/api/');
 
 const wallet = getWallet();
 const authenticator = new WalletAuthenticator();
@@ -19,4 +22,5 @@ module.exports = {
   authenticator,
   handlers,
   wallet,
+  client,
 };

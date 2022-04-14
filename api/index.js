@@ -3,7 +3,6 @@ require('express-async-errors');
 
 const path = require('path');
 const cors = require('cors');
-const Gun = require('gun');
 const express = require('express');
 const compression = require('compression');
 const cookieParser = require('cookie-parser');
@@ -11,7 +10,8 @@ const fallback = require('express-history-api-fallback');
 
 const { name, version } = require('../package.json');
 const logger = require('./libs/logger');
-const env = require('./libs/env');
+
+const authRoute = require('./routes/auth');
 
 const app = express();
 
@@ -20,10 +20,10 @@ app.use(cookieParser());
 app.use(express.json({ limit: '1 mb' }));
 app.use(express.urlencoded({ extended: true, limit: '1 mb' }));
 
-app.use(Gun.serve);
-
 const router = express.Router();
+authRoute.init(router);
 router.use('/api', require('./routes'));
+router.use('/api', require('./routes/project'));
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 const isProduction = process.env.NODE_ENV === 'production' || process.env.ABT_NODE_SERVICE_ENV === 'production';
@@ -60,6 +60,4 @@ const server = app.listen(port, (err) => {
   logger.info('> gun server ready on /gun');
 });
 
-const gun = Gun({ web: server, file: path.join(env.dataDir, 'gun.json') });
-
-module.exports = { gun, server, app };
+module.exports = { server, app };
